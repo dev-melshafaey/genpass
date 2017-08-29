@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
+
+*{
+    color: #000;
+}
+
+.control-label{
+    text-align: left !important;
+    font-size: 14px;
+}
+
+h3{
+    text-align: center;
+    margin: 20px;
+}
+
+form{
+    //width: 60%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    float: none !important;
+}
+
+.ads{
+    //width: 60%;
+    height: 100px;
+    border: 1px solid #CA0000;
+    text-align: center;
+    margin: 10px auto;
+    float: none !important;
+}
+
+button{
+    margin: 5px;
+}
+
+.navbar-inverse .navbar-nav>li>a{
+    color: #fff;
+    border: none;
+}
+
+.navbar{
+    margin: 0 -15px;
+}
+
+.mainh{
+    background: #F3F3F3;
+    //font-weight: bold;
+    font-weight: 600;
+    display: block;
+    height: 60px;
+    margin: 0 -15px;
+    padding: 10px 0;
+    color: #777777;
+    font-family: 'Questrial';
+}
+
+span{
+    font-size: 20px;
+}
+
+.navbar-inverse .navbar-nav>li>a:active,.navbar-inverse .navbar-nav>li>a:hover{
+    background: #810000 !important;
+    border: none;
+}
+
+.nav-tabs{
+    border: none;
+}
+
+#tabs .active{
+    background: #810000 !important;
+    border: none !important;
+}
+
+input[type='text']{
+    font-size: 16px;
+    padding: 2px;
+}
+
+/*@media(max-width:767px){}
+@media(min-width:768px){}
+@media(min-width:992px){}
+@media(min-width:1200px){}*/
+
+
+

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html ng-app="GenPass" ng-controller="MainCtrl">
+    <head>
+        <title>Generate passwords</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/passmeter.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+        <div class="container-fluid">
+
+            <h3 class="mainh"> <img src="css/asterisk.png" alt=""> <img src="css/asterisk.png" alt=""> <img src="css/asterisk.png" alt=""> strong_password_generator</h3>            
+
+            <nav class="navbar navbar-inverse">
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"></a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                    <ul id="tabs" data-tabs="tabs" class="nav navbar-nav pull-right nav nav-tabs">
+                        <li class="active"><a href="#single" data-toggle="tab">Single password <span class="sr-only">(current)</span></a></li>
+                        <li><a href="#bulk" data-toggle="tab">Bulk password</a></li>
+                    </ul>
+                </div>
+
+            </nav>
+
+            <!--<h3>GENERATE A PASSWORD</h3>-->
+
+            <div class="ads col-md-8 col-sm-6 col-lg-8">ads</div>
+
+            <div id="my-tab-content" class="tab-content">
+                <div class="tab-pane active" id="single">
+
+                    <form class="form-horizontal col-md-8 col-sm-6 col-lg-8" >
+
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Password Length:</label>
+                            <div class="col-lg-8">
+                                <select ng-model="passLength" class="form-control" id="select">
+                                    <option value="5">5 characters</option>
+                                    <option value="7">7 characters</option>
+                                    <option value="10">10 characters</option>
+                                    <option value="15">15 characters</option>
+                                    <option value="20">20 characters</option>
+                                    <option value="515">Mixed 5-20</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Case (UPPER,lower, MiXED):</label>
+                            <div class="col-lg-8">
+                                <select  ng-model="passCase" class="form-control">
+                                    <option value="upper">UPPER</option>
+                                    <option value="lower">lower</option>
+                                    <option value="mixed">MiXED</option>
+
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">letters only:</label>
+                            <div class="col-lg-8">
+                                <div class="checkbox">
+                                    <label>
+                                        <input ng-model="passType" value="letters" name="options" type="radio"> (abcde)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">letters & numbers:</label>
+                            <div class="col-lg-8">
+                                <div class="checkbox">
+                                    <label>
+                                        <input ng-model="passType" value="letnum" name="options" type="radio"> (abcde12345)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">letters, numbers and symbols:</label>
+                            <div class="col-lg-8">
+                                <div class="checkbox">
+                                    <label>
+                                        <input ng-model="passType" value="letnumsym" name="options" type="radio"> (abcde12345@#$%^&*!)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="button" ng-click="generateSingle()" class="btn btn-primary pull-right">Generate password</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Resulting password:</label>
+                            <div class="col-lg-8">
+                                <input type="text" id="new_password" ng-model="result" class="form-control result">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Password strength:</label>
+                            <div class="col-lg-8">
+                                <!--<div class="progress progress-striped active">
+                                    <div class="progress-bar" style="width: 45%"></div>
+                                </div>-->
+                                <div id="progress-bar-location"></div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button class="btn btn-primary pull-right" clipboard supported="supported" text="result" on-copied="success()" on-error="fail(err)">Copy to clipboard</button>
+                            </div>
+                        </div>            
+
+                    </form>
+                </div>
+
+                <div class="tab-pane" id="bulk">
+                    <form class="form-horizontal col-md-8 col-sm-6 col-lg-8" >
+
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">No. of passwords</label>
+                            <div class="col-lg-8">
+                                <select ng-model="noOfPasswords" class="form-control">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="30">30</option>
+                                    <option value="40">40</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Password Length:</label>
+                            <div class="col-lg-8">
+                                <select ng-model="bulklength" class="form-control">
+                                    <option value="5">5 characters</option>
+                                    <option value="7">7 characters</option>
+                                    <option value="10">10 characters</option>
+                                    <option value="15">15 characters</option>
+                                    <option value="20">20 characters</option>
+                                    <option value="515">Mixed 5-20</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Case (UPPER,lower, MiXED):</label>
+                            <div class="col-lg-8">
+                                <select ng-model="bulkcase" class="form-control">
+                                    <option value="upper">UPPER</option>
+                                    <option value="lower">lower</option>
+                                    <option value="mixed">MiXED</option>
+
+                                </select>
+
+                            </div>
+                        </div> 
+
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">letters only:</label>
+                            <div class="col-lg-8">
+                                <div class="checkbox">
+                                    <label>
+                                        <input ng-model="bulktype" value="letters" name="bulkoptions" type="radio"> (abcde)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">letters & numbers:</label>
+                            <div class="col-lg-8">
+                                <div class="checkbox">
+                                    <label>
+                                        <input ng-model="bulktype" value="letnum" name="bulkoptions" type="radio"> (abcde12345)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">letters, numbers and symbols:</label>
+                            <div class="col-lg-8">
+                                <div class="checkbox">
+                                    <label>
+                                        <input ng-model="bulktype" value="letnumsym" name="bulkoptions" type="radio"> (abcde12345@#$%^&*!)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="button" ng-click="generateBulk()" class="btn btn-primary pull-right">Generate passwords</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Resulting passwords:</label>
+                            <div class="col-lg-8">
+                                <textarea ng-trim="false" ng-model="bulkresult" id="bulkresult" class="form-control" rows="7"></textarea>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">
+                            <label class="col-lg-4 control-label">Password strength:</label>
+                            <div class="col-lg-8">
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar" style="width: 45%"></div>
+                                </div>
+                            </div>
+                        </div>-->
+
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button class="btn btn-primary pull-right" clipboard supported="supported" text="bulkresult" on-copied="success()" on-error="fail(err)">Copy to clipboard</button>
+                                <button type="button" ng-click="saveFile()" class="btn btn-primary pull-right">Download .txt</button>
+                            </div>
+                        </div>      
+
+
+                    </form>
+                </div>
+            </div>
+
+            <div class="ads col-md-8 col-sm-6 col-lg-8">ads</div>
+        </div>
+
+        <script type="text/javascript">
+                    jQuery(document).ready(function ($) {
+                        $('#tabs').tab();
+                    });
+        </script>
+
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/passmeter.js"></script>
+        <script src="js/angular.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/angular-clipboard.js"></script>
+        <script src="js/filesaver.js"></script>
+
+
+    </body>
+</html>
